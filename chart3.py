@@ -57,24 +57,24 @@ def main():
     def autolabel(rects):
         """Attach a text label above each bar in *rects*, displaying its height."""
         for rect in rects:
-            height = rect.get_height()
-            ax.annotate('{:.1f}'.format(height/1e9),
-                        xy=(rect.get_x() + rect.get_width() / 2, height),
-                        xytext=(0, 3),  # 3 points vertical offset
+            width = rect.get_width()
+            ax.annotate('{:.1f}'.format(width/1e9),
+                        xy=(width, rect.get_y() + rect.get_height() / 2),
+                        xytext=(3, 0),
                         textcoords="offset points",
-                        ha='center', va='bottom')
+                        ha='left', va='center')
 
 
     for i in range(num_of_dbs):
-        autolabel(ax.bar(-(num_of_dbs*width)/2 + width/2 + x + width*i, durations[i], width * 0.95, label=os.path.splitext(db_filenames[i])[0]))
-    plt.xticks(x, labels, rotation=60, rotation_mode="anchor", horizontalalignment="right", verticalalignment="center")
+        autolabel(ax.barh(-(num_of_dbs*width)/2 + width/2 + x + width*i, durations[i], width * 0.95, label=os.path.splitext(db_filenames[i])[0]))
+    plt.yticks(x, labels)
     ax.legend(bbox_to_anchor=(1.1, 1.05))
     # plt.yticks([1e8, 1e8 * 5, 1e9, 1e9 * 5])
-    plt.yticks([])
-    plt.ylabel('Time(sec)')
+    plt.xticks([])
+    plt.xlabel('Time(sec)')
 
     x1,x2,y1,y2 = plt.axis()
-    plt.axis((x1,x2,y1,y2*1.05))
+    plt.axis((x1,x2*1.05,y1,y2))
 
     plt.tight_layout()
     plt.show()
