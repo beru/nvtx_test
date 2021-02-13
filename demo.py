@@ -7,6 +7,6 @@ import nvtx
 def my_function():
     for i in range(5):
         with nvtx.annotate("my_loop", color="red"):
-            time.sleep(max(0, i - 0.3))
+            time.sleep(max(0, i + 2))
 
 my_function()

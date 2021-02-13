@@ -75,6 +75,7 @@ def main():
 
     x1,x2,y1,y2 = plt.axis()
     plt.axis((x1,x2*1.05,y1,y2))
+    plt.gca().invert_yaxis()
 
     plt.tight_layout()
     plt.show()
